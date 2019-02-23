@@ -15,6 +15,7 @@
   "author": "Prakhar Pal",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "chart.js": "^2.7.3",
     "express": "^4.16.4",
     "webpack-cli": "^3.2.3"
   },
