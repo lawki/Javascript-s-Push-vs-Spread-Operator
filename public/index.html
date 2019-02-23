@@ -3,26 +3,38 @@
 
 <head>
 	<title>Comparison of Arr insertion methods</title>
+	<style>
+		.container {
+			width: "90%";
+			margin: 0 auto;
+		}
+
+		#graph {
+			width: "50%";
+		}
+	</style>
 </head>
 
 <body>
-	<form onsubmit="return handleFormSubmit()">
-		<span>
-			<label>Start Value:</label>
-			<input id="startValue" name="startValue" type="number" placeholder="Input the start value">
-		</span>
-		<span>
-			<label>End Value:</label><input id="endValue" name="endValue" type="number" placeholder="Input the end value">
-		</span>
-		<span>
-			<label>Increment By:</label><input id="incrementValue" name="incrementValue" type="number"
-				placeholder="increment by?">
-		</span>
-		<button type="submit">Compare</button>
-	</form>
-	<canvas id="line_graph" style="height:80%;"></canvas>
-	<script type="text/javascript"
-		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+	<div class="container">
+		<form onsubmit="return handleFormSubmit()">
+			<span>
+				<label>Start Value:</label>
+				<input id="startValue" name="startValue" type="number" placeholder="Input the start value">
+			</span>
+			<span>
+				<label>End Value:</label><input id="endValue" name="endValue" type="number"
+					placeholder="Input the end value">
+			</span>
+			<span>
+				<label>Increment By:</label><input id="incrementValue" name="incrementValue" type="number"
+					placeholder="increment by?">
+			</span>
+			<button type="submit">Compare</button>
+		</form>
+		<canvas id="line_graph" height="90%" style="height:80%;"></canvas>
+	</div>
+	<script type="text/javascript" src="/dist/Chart.bundle.min.js"></script>
 	<script type="text/javascript" src="/compare_util.js" type="module"></script>
 	<script type="text/javascript">
 		const statusElement = document.getElementById("status");
@@ -32,7 +44,7 @@
 		let hasBodyLoaded = false;
 		let canvas = document.getElementById("line_graph");
 		let ctx = canvas.getContext('2d');
-		function estimateTimeDifferencesAndPlot(startValue,endValue,incrementBy) {
+		function estimateTimeDifferencesAndPlot(startValue, endValue, incrementBy) {
 			hasBodyLoaded = true;
 			const inputInc = parseInt(incrementBy) || 5;
 			let input = parseInt(startValue) || 10;
@@ -82,7 +94,7 @@
 			const startValue = startValueElement.value;
 			const endValue = endValueElement.value;
 			const incrementValue = incrementValueElement.value;
-			estimateTimeDifferencesAndPlot(startValue,endValue,incrementValue);
+			estimateTimeDifferencesAndPlot(startValue, endValue, incrementValue);
 			return false;
 		}
 	</script>
