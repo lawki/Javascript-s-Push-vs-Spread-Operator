@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>Comparison of Arr insertion methods</title>
+</head>
+
+<body>
+	<form onsubmit="return handleFormSubmit()">
+		<span>
+			<label>Start Value:</label>
+			<input id="startValue" name="startValue" type="number" placeholder="Input the start value">
+		</span>
+		<span>
+			<label>End Value:</label><input id="endValue" name="endValue" type="number" placeholder="Input the end value">
+		</span>
+		<span>
+			<label>Increment By:</label><input id="incrementValue" name="incrementValue" type="number"
+				placeholder="increment by?">
+		</span>
+		<button type="submit">Compare</button>
+	</form>
+	<canvas id="line_graph" style="height:80%;"></canvas>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.bundle.min.js"></script>
+	<script type="text/javascript" src="/compare_util.js" type="module"></script>
+	<script type="text/javascript">
+		const statusElement = document.getElementById("status");
+		const startValueElement = document.getElementById("startValue");
+		const endValueElement = document.getElementById("endValue");
+		const incrementValueElement = document.getElementById("incrementValue");
+		let hasBodyLoaded = false;
+		let canvas = document.getElementById("line_graph");
+		let ctx = canvas.getContext('2d');
+		function estimateTimeDifferencesAndPlot(startValue,endValue,incrementBy) {
+			hasBodyLoaded = true;
+			const inputInc = parseInt(incrementBy) || 5;
+			let input = parseInt(startValue) || 10;
+			let pushTimes = [], spreadTimes = [], inputs = [];
+			endValue = parseInt(endValue) || 100;
+			console.debug(`start value ${input}, end value ${endValue}, increment by ${incrementBy}`);
+			while (input <= endValue) {
+				inputs.push(input);
+				const compare = Compare(input);
+				const seedSize = compare.getSeedSize();
+				if (statusElement) statusElement.innerHTML = "Calculating times for input size of " + input;
+				pushTimes.push(compare.usingPush());
+				spreadTimes.push(compare.usingSpread());
+				input += inputInc;
+			}
+			console.debug("Push times ", pushTimes, "\n spread times ", spreadTimes);
+			const options = {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero: true
+						},
+						scaleLabel: {
+							display: true,
+							labelString: 'Moola',
+							fontSize: 20
+						}
+					}]
+				}
+			};
+			const myChart = new Chart(ctx, {
+				type: "line",
+				data: {
+					labels: inputs,
+					datasets: [{
+						label: "Push",
+						data: pushTimes
+					}, {
+						label: "spread",
+						data: spreadTimes
+					}]
+				}
+				, options: options
+			});
+		}
+		const handleFormSubmit = function () {
+			const startValue = startValueElement.value;
+			const endValue = endValueElement.value;
+			const incrementValue = incrementValueElement.value;
+			estimateTimeDifferencesAndPlot(startValue,endValue,incrementValue);
+			return false;
+		}
+	</script>
+</body>
+
+</html>

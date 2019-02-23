@@ -1,0 +1,27 @@
+{
+  "name": "arr_push_vs_spread_operator",
+  "version": "0.1.0",
+  "description": "Comparison between two methods of value insertion into arrays, 1) array.push ,2) spread operator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "array",
+    "push",
+    "spread",
+    "operator"
+  ],
+  "author": "Prakhar Pal",
+  "license": "GPL-3.0-or-later",
+  "dependencies": {
+    "express": "^4.16.4",
+    "webpack-cli": "^3.2.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.3",
+    "@babel/preset-env": "^7.3.1",
+    "babel-loader": "^8.0.5",
+    "webpack": "^4.29.5"
+  }
+}
