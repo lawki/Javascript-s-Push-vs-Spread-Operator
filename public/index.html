@@ -63,28 +63,40 @@
 			console.debug("Push times ", pushTimes, "\n spread times ", spreadTimes);
 			const options = {
 				scales: {
+					title:{
+						display: true,
+						text: "Array.push(val) vs [..., val] spread operator"
+					},
 					yAxes: [{
 						ticks: {
 							beginAtZero: true
 						},
 						scaleLabel: {
 							display: true,
-							labelString: 'Moola',
+							labelString: 'Time (in ms)',
 							fontSize: 20
+						}
+					}],
+					xAxes: [{
+						scaleLabel: {
+							display: true,
+							labelString: "Input size for seed"
 						}
 					}]
 				}
 			};
 			const myChart = new Chart(ctx, {
-				type: "line",
+				type: "bar",
 				data: {
 					labels: inputs,
 					datasets: [{
 						label: "Push",
-						data: pushTimes
+						data: pushTimes,
+						backgroundColor: "#99ff33"
 					}, {
 						label: "spread",
-						data: spreadTimes
+						data: spreadTimes,
+						backgroundColor: "#ff5050"
 					}]
 				}
 				, options: options
